@@ -23,6 +23,12 @@ public class GymAPI {
     public ArrayList<Member> getMembers() {
         return members;
     }
+    public ArrayList<Trainer> getTrainers() {
+        return trainers;
+    }
+    public ArrayList<Person> getPersons() {
+        return persons;
+    }
 
     public void addMember(Member member) {
                 members.add(member);

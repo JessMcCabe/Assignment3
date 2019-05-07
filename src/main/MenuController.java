@@ -19,6 +19,8 @@ public class MenuController {
     private Trainer trainer;
     private Member member;
     private boolean registerd;
+    private boolean emailCorrect = false;
+    boolean matches = true;
     public MenuController() {
 
 
@@ -37,7 +39,7 @@ public class MenuController {
 
     //make this the main menu and when we know if it is a member or trainer we then call the appropriate submenu
     private String mainMenu() {
-        System.out.println("My Play Gym");
+        System.out.println("Welcome To Play Gym Online");
         System.out.println("  1) To Login press L , to register, press R");
         //System.out.println("  2) List all members");
         /*System.out.println("  3) Update a DVD");
@@ -146,12 +148,13 @@ public class MenuController {
 
             Person personPart = registerUser();
 
-
+            System.out.println("Please enter your speciality");
+            String speciality = input.nextLine();
             System.out.println("All filled in ");
 
             //input.nextLine();
             registerd = true;
-            trainer = new Trainer(personPart.getEmail(), personPart.getName(), personPart.getAddress(), personPart.getGender());
+            trainer = new Trainer(personPart.getEmail(), personPart.getName(), personPart.getAddress(), personPart.getGender(),speciality);
             gym.addPerson(trainer);
 
             //person= newMember;
@@ -164,8 +167,16 @@ public class MenuController {
 
     }
     private Person registerUser(){
-        System.out.println("Please enter your email address");
-        String email = input.nextLine();
+        String email = "";
+        while (matches){
+          System.out.println("Please enter your email address");
+          email = input.nextLine();
+          //check if the email already exists
+          if (emailExists(email)) {
+              System.out.println("email exists");
+          }
+      }
+
         System.out.println("Please enter your name");
         String name = input.nextLine();
         System.out.println("Please enter your address");
@@ -185,6 +196,29 @@ public class MenuController {
             System.out.println("Error Loading members.xml file" + e);
         }
 }
+
+ private boolean emailExists(String email){
+    matches = false;
+    //all persons who exist
+     ArrayList<Person> persons = new ArrayList<Person>();
+     persons = gym.getPersons();
+
+     //check if the email already exists
+     for(int i = 0; i<persons.size(); i ++){
+
+         if(persons.get(i).getEmail().equals(email)){
+             matches = true;
+             emailCorrect = true;
+             return matches;
+             //break;
+         }
+         else {
+             matches = false;
+             emailCorrect = true;
+         }
+     }
+     return matches;
+ }
 
     //This needs to be a hasMap
     /*

@@ -81,5 +81,15 @@ public class Member extends Person {
     }
 
 
+    @Override
+    public String toString() {
+        return "Member{" +
+                "height=" + height +
+                ", startWeight=" + startWeight +
+                ", chosenPackage='" + chosenPackage + '\'' +
+                ", gender='" + gender + '\'' +
+                ", name='" + name + '\'' +
+                '}' + " " + super.toString();
+    }
 }
 
