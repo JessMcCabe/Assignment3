@@ -14,6 +14,14 @@ public class GymAPI {
     private ArrayList<Member> members;
     private ArrayList<Trainer> trainers;
 
+    private static float maleBaseWeight = 50f;
+    private static float femaleBaseWeight = 45.5f;
+    private static float additionalWeight = 2.3f;
+    private static double inchesOver;
+    private static float weightAllowed;
+
+private static GymUtility gymUtility = new GymUtility();
+
     public GymAPI() {
         this.persons = new ArrayList<Person>();
         this.members = new ArrayList<Member>();
@@ -75,6 +83,112 @@ public class GymAPI {
             return false;
         }
     }
+
+
+    public Member searchMembersByEmail(String email){
+        Member member = null;
+        ArrayList<Member> members = new ArrayList<Member>();
+        members = getMembers();
+
+        //check if the email already exists
+        for(int i = 0; i<members.size(); i ++){
+
+            if(members.get(i).getEmail().equals(email)){
+
+                member = members.get(i);
+                //break;
+            }
+
+        }
+        return member;
+
+
+}
+
+    public ArrayList<String> searchMembersByName(String name){
+        ArrayList<String> member = new ArrayList<>();
+        ArrayList<Member> members = members = getMembers();
+
+        //check if the email already exists
+        for(int i = 0; i<members.size(); i ++){
+
+            if(members.get(i).getName().contains(name)){
+
+                member.add(members.get(i).getName());
+                //break;
+            }
+
+        }
+        return member;
+
+
+    }
+
+    public Trainer searchTrainersByEmail(String email){
+        Trainer trainer = null;
+        ArrayList<Trainer> trainers = trainers = getTrainers();
+
+        //check if the email already exists
+        for(int i = 0; i<trainers.size(); i ++){
+            if(trainers.get(i).getEmail().equals(email)){
+                trainer = trainers.get(i);
+            }
+        }
+        return trainer;
+
+    }
+
+    public ArrayList<String> searchTrainersByName(String name){
+        ArrayList<String> trainer = new ArrayList<>();
+        ArrayList<Trainer> trainers = trainers = getTrainers();
+
+        //check if the email already exists
+        for(int i = 0; i<trainers.size(); i ++){
+
+            if(trainers.get(i).getName().contains(name)){
+
+                trainer.add(trainers.get(i).getName());
+                //break;
+            }
+
+        }
+        return trainer;
+
+
+    }
+
+    public ArrayList<Member> listMembersWithIdealWeight() {
+        ArrayList<Member> members = getMembers();
+        ArrayList<Member> membersWithIdealWeight = new ArrayList<>();
+        for (int i = 0; i < members.size(); i++) {
+        if(gymUtility.isIdealBodyWeight(members.get(i),members.get(i).latestAssessment())) {
+            membersWithIdealWeight.add(members.get(i));
+        }
+
+        }
+
+        return membersWithIdealWeight;// depending on ideal or not
+
+    }
+
+
+    public ArrayList<Member>  listMembersBySpecificBMICategory(String category){
+
+        ArrayList<Member> members = new ArrayList<>();
+        members = getMembers();
+        return members;
+        //TO-DO
+    }
+
+
+    public String listMemberDetailsImperialAndMetric(){
+        String member = "";
+        ArrayList<Member> members = new ArrayList<>();
+        members = getMembers();
+        return member;
+        //TO-DO
+    }
+
 
     @SuppressWarnings("unchecked")
     public void load() throws Exception

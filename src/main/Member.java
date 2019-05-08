@@ -1,20 +1,27 @@
 
 // THIS CODE IS INCOMPLETE
 
+import java.util.*;
+
 public class Member extends Person {
     private float height;
+    private float weight;
     private float startWeight;
     private String chosenPackage;
     private String gender;
     private String name;
 
     public Member(String email, String name, String address,
-                  String gender, float height, float startWeight, String chosenPackage) {
+                  String gender, float height, float weight, String chosenPackage) {
         super(email, name, address, gender);
         setHeight(height);
-        setStartWeight(startWeight);
+        setWeight(weight);
         setChosenPackage(chosenPackage);
     }
+
+
+    public HashMap<String,Assessment> assessments = new HashMap<String,Assessment>();
+
 
     public float getHeight() {
         return height;
@@ -29,6 +36,21 @@ public class Member extends Person {
                 this.height = height;
             }
         } else this.height = 0;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+    //startWeight must be bewteen 35 and 250
+    public void setWeight(float weight) {
+        if (weight >= 35 & weight <= 250) {
+            if (weight % 2 != 0) {
+                this.weight = Math.round(weight);
+            } else {
+                this.weight = weight;
+            }
+        }
+        else this.weight =0;
     }
 
     public float getStartWeight() {
@@ -80,12 +102,33 @@ public class Member extends Person {
         }
     }
 
+    public HashMap<String,Assessment> getAssessments() {
+        return assessments;
+    }
+
+
+   public SortedSet<String> sortedAssessmentDates(){
+
+       SortedSet<String> sorted = new TreeSet<>();;
+       return sorted;
+       //http://www.java2s.com/Tutorials/Java/Java_Collection/0110__Java_Sorted_Set.htm
+       //TO_DO
+   }
+
+   public Assessment latestAssessment (){
+        int i=0;//for resolving error in test only -
+       HashMap<String,Assessment> assessments = new HashMap<String,Assessment>();
+       return  assessments.get(i);
+
+       //TO_DO
+
+   }
 
     @Override
     public String toString() {
         return "Member{" +
                 "height=" + height +
-                ", startWeight=" + startWeight +
+                ", startWeight=" + weight +
                 ", chosenPackage='" + chosenPackage + '\'' +
                 ", gender='" + gender + '\'' +
                 ", name='" + name + '\'' +
