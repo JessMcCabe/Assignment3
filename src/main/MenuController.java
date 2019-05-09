@@ -19,6 +19,8 @@ public class MenuController {
     private Trainer trainer;
     private Member member;
     private boolean registerd;
+    private boolean loggedIn;
+    private String userType;
     private boolean emailCorrect = false;
     boolean matches = true;
     public MenuController() {
@@ -73,12 +75,42 @@ public class MenuController {
         while (!option.equals("close")) {
             switch (option.toUpperCase()) {
                 case "L":
-                    System.out.println("You have chosen to log in");
+                    System.out.println("You have chosen to Login");
+                    System.out.println("To Login as a Member please enter M, to Login as a Trainer please enter T");
+                    userType = input.nextLine();
+                    while(!loggedIn) {
+                        switch (userType.toUpperCase()) {
+                            case "M":
+                                System.out.println("Please enter your email address");
+                                String email = input.nextLine();
+                                try {
+
+                                    Member member = authenticateAsMember(email);//authenticate member
+                                    if(member.getEmail() == null){
+                                        System.out.println("You have not been recognised as a member on our system");
+                                    }
+                                }
+                                catch(Exception e){
+                                    System.out.println("You have not been recognised as a member on our system");
+                                }
+                                break;
+                            case "T":
+                                registerTrainer(); //authenticate trainer
+                                break;
+                            default:
+                                break;
+
+                        }
+                        System.out.println("Press enter to continue");
+                        loggedIn=false;
+                        input.nextLine();
+                        run();
+                    }
                     break;
                 case "R":
                     System.out.println("You have chosen to Register");
                     System.out.println("To Register as a Member please enter M, to Register as a Trainer please enter T");
-                    String userType = input.nextLine();
+                    userType = input.nextLine();
                     while(!registerd) {
                         switch (userType.toUpperCase()) {
                             case "M":
@@ -220,6 +252,18 @@ public class MenuController {
      return matches;
  }
 
+
+ private Member authenticateAsMember(String email) {
+     loggedIn = false;
+     Member member = null;
+     if (emailExists(email)) {
+         //gym.searchMembersByEmail(email);//authenticate member
+         member = new Member(gym.searchMembersByEmail(email).getEmail(),gym.searchMembersByEmail(email).getName(),gym.searchMembersByEmail(email).getAddress(),gym.searchMembersByEmail(email).getGender(),
+                 gym.searchMembersByEmail(email).getHeight(),gym.searchMembersByEmail(email).getWeight(),gym.searchMembersByEmail(email).getChosenPackage());
+         loggedIn = true;
+     }
+     return member;
+ }
     //This needs to be a hasMap
     /*
     ("Package 1", "Allowed access anytime to gym.\nFree access to all classes.\nAccess to all changing areas including deluxe changing rooms.");

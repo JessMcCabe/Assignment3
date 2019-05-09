@@ -2,6 +2,8 @@
 // THIS CODE IS INCOMPLETE
 
 import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 public class Member extends Person {
     private float height;
@@ -107,17 +109,21 @@ public class Member extends Person {
     }
 
 
-   public SortedSet<String> sortedAssessmentDates(){
+   public SortedSet<String> sortedAssessmentDates() {
 
-       SortedSet<String> sorted = new TreeSet<>();;
-       return sorted;
+
+       //get the Key (which is the dates, from the assessments)
+
+
+        return null;
+
        //http://www.java2s.com/Tutorials/Java/Java_Collection/0110__Java_Sorted_Set.htm
        //TO_DO
    }
 
    public Assessment latestAssessment (){
         int i=0;//for resolving error in test only -
-       HashMap<String,Assessment> assessments = new HashMap<String,Assessment>();
+       HashMap<String,Assessment> assessments = new HashMap<>();
        return  assessments.get(i);
 
        //TO_DO

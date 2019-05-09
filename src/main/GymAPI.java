@@ -30,6 +30,8 @@ private static GymUtility gymUtility = new GymUtility();
 
     public ArrayList<Member> getMembers() {
         return members;
+
+        //nned to get members from person list below.
     }
     public ArrayList<Trainer> getTrainers() {
         return trainers;
