@@ -57,9 +57,11 @@ public class MenuController {
 
     private String memMenu() {
         System.out.println("Please choose from one of the following options:");
-        System.out.println("To view your profile press v");
-        System.out.println("To update your profile press u");
-        System.out.println("To view your progress press p");
+        System.out.println("OPTION \t \t \t \t \t DESCRIPTION"
+        +"\n V  \t \t \t \t \t  To view your profile press v"
+        +"\n U  \t \t \t \t \t  To update your profile press u"
+        +"\n P  \t \t \t \t \t  To view your progress press p"
+        +"\n L  \t \t \t \t \t  To Logout press l");
 
         do {
             try {
@@ -140,6 +142,11 @@ public class MenuController {
                         case "P":
                             System.out.println("You have chosen to view your progress:");
                             break;
+                        case "L":
+                            System.out.println("You have logged out");
+                            loggedIn = false;
+                            mainMenu();
+                            break;
                         default:
                             break;
 
@@ -147,7 +154,7 @@ public class MenuController {
                     System.out.println("Press enter to continue");
                     loggedIn=false;
                     input.nextLine();
-                    run();
+                    memMenu();
                 }
                 break;
                 case "R":
