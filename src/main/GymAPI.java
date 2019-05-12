@@ -26,18 +26,33 @@ private static GymUtility gymUtility = new GymUtility();
         this.persons = new ArrayList<Person>();
         this.members = new ArrayList<Member>();
         this.trainers = new ArrayList<Trainer>();
+
     }
 
     public ArrayList<Member> getMembers() {
+
         return members;
 
-        //nned to get members from person list below.
+
     }
     public ArrayList<Trainer> getTrainers() {
         return trainers;
     }
     public ArrayList<Person> getPersons() {
+        splitPersons();
         return persons;
+
+    }
+
+    public void splitPersons(){
+
+        for (Person person : persons) {
+            if (person instanceof Member) {
+                members.add((Member)person);
+            } else if (person instanceof Trainer) {
+                trainers.add((Trainer)person);
+            }
+        }
     }
 
     public void addMember(Member member) {

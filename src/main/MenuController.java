@@ -223,6 +223,7 @@ public class MenuController {
 
   try {
             gym.load();
+
         }
         catch(Exception e){
             System.out.println("Error Loading members.xml file" + e);
