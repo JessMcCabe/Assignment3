@@ -132,13 +132,13 @@ public class Member extends Person {
 
     @Override
     public String toString() {
-        return "Member{" +
-                "height=" + height +
-                ", startWeight=" + weight +
-                ", chosenPackage='" + chosenPackage + '\'' +
-                ", gender='" + gender + '\'' +
-                ", name='" + name + '\'' +
-                '}' + " " + super.toString();
+        return "Member: " + name.toUpperCase() +
+                "\n Height:" + "\t"+"\t" +"\t" + height +
+                " \n Start Weight:" + "\t"+"\t" +weight +
+                " \n Chosen Package:" + "\t" +chosenPackage +
+                " \n Gender:" + "\t"+"\t"+"\t" +gender +
+                " \n Email Address:" + "\t"+"\t" +super.getEmail() +
+                 " \n Address:" + "\t"+"\t" +"\t"+super.getAddress() + "\n";
     }
 }
 

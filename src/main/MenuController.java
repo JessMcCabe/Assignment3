@@ -43,14 +43,23 @@ public class MenuController {
     private String mainMenu() {
         System.out.println("Welcome To Play Gym Online");
         System.out.println("  1) To Login press L , to register, press R");
-        //System.out.println("  2) List all members");
-        /*System.out.println("  3) Update a DVD");
-        System.out.println("  4) Delete a DVD");
-        System.out.println("  ----------------");
-        System.out.println("  5) Save all DVDs");
-        System.out.println("  6) Load all DVDs");
-        System.out.println("  ----------------");
-        System.out.println("  0) Exit");*/
+        do {
+            try {
+                System.out.print("==>> ");
+                return input.nextLine();
+            } catch (Exception e) {
+                input.nextLine();  //swallows Scanner bug
+                System.out.println("Something went Wrong, please try again");
+            }
+        } while (true);
+
+    }
+
+    private String memMenu() {
+        System.out.println("Please choose from one of the following options:");
+        System.out.println("To view your profile press v");
+        System.out.println("To update your profile press u");
+        System.out.println("To view your progress press p");
 
         do {
             try {
@@ -70,7 +79,6 @@ public class MenuController {
      * Option "CLOSE" exits the app
      */
     private void run() {
-
         String option = mainMenu();
         while (!option.equals("close")) {
             switch (option.toUpperCase()) {
@@ -85,13 +93,16 @@ public class MenuController {
                                 String email = input.nextLine();
                                 try {
 
-                                    Member member = authenticateAsMember(email);//authenticate member
+                                     member = authenticateAsMember(email);//authenticate member
                                     if(member.getEmail() == null){
                                         System.out.println("You have not been recognised as a member on our system");
+                                        System.out.println("If you are registered, please try re-typing your email address,otherwise please return to the main menu and register");
                                     }
+                                    System.out.println("Hello " + member.getName());
                                 }
                                 catch(Exception e){
                                     System.out.println("You have not been recognised as a member on our system");
+                                    System.out.println("If you are registered, please try re-typing your email address,otherwise please return to the main menu and register");
                                 }
                                 break;
                             case "T":
@@ -101,12 +112,44 @@ public class MenuController {
                                 break;
 
                         }
-                        System.out.println("Press enter to continue");
-                        loggedIn=false;
-                        input.nextLine();
-                        run();
+                       // System.out.println("Press enter to continue");
+                       // loggedIn=false;
+                       // input.nextLine();
+                       // run();
+                    }//here we have options for the logged in member
+                while(loggedIn) {
+                    String memOp = memMenu();
+                    switch (memOp.toUpperCase()) {
+                        case "V":
+                            System.out.println("You have chose to view your profile:");
+                            System.out.println("Please press enter to show your profile:");
+                            input.nextLine();
+                            try {
+
+                                System.out.println( member.toString());
+
+                            }
+                            catch(Exception e){
+                                System.out.println("Something went wrong");
+
+                            }
+                            break;
+                        case "U":
+                            System.out.println("You have chosen to update your profile:");
+                            break;
+                        case "P":
+                            System.out.println("You have chosen to view your progress:");
+                            break;
+                        default:
+                            break;
+
                     }
-                    break;
+                    System.out.println("Press enter to continue");
+                    loggedIn=false;
+                    input.nextLine();
+                    run();
+                }
+                break;
                 case "R":
                     System.out.println("You have chosen to Register");
                     System.out.println("To Register as a Member please enter M, to Register as a Trainer please enter T");
