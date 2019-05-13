@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -36,6 +37,13 @@ public class MenuController {
     }
 
     public static void main(String args[]) {
+        //This needs to be a hasMap
+        HashMap<String, String>memberPackages =  new HashMap<>();
+
+        memberPackages.put("Package 1","Allowed access anytime to gym.\n Free access to all classes.\nAccess to all changing areas including deluxe changing rooms.");
+        memberPackages.put("Package 2", "Allowed access anytime to gym.\n€3 fee for all classes.\nAccess to all changing areas including deluxe changing rooms.");
+        memberPackages.put("Package 3", "Allowed access to gym at off-peak times. \n €5 fee for all classes. \n No access to deluxe changing rooms.");
+        memberPackages.put("WIT", "Allowed access to gym during term time. \n €4 fee for all classes.  \n No access to deluxe changing rooms.");
 
         MenuController app = new MenuController();
         app.populateGym();
@@ -425,16 +433,6 @@ public class MenuController {
         }
         return trainer;
     }
-    //This needs to be a hasMap
-    /*
-    ("Package 1", "Allowed access anytime to gym.\nFree access to all classes.\nAccess to all changing areas including deluxe changing rooms.");
 
-("Package 2", "Allowed access anytime to gym.\n€3 fee for all classes.\nAccess to all changing areas including deluxe changing rooms.");
-
-("Package 3", "Allowed access to gym at off-peak times.
-        \n€5 fee for all classes. \nNo access to deluxe changing rooms.");
-
-            ("WIT", "Allowed access to gym during term time.
-            \n€4 fee for all classes.  \nNo access to deluxe changing rooms.");*/
 }
 
