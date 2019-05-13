@@ -19,9 +19,12 @@ public class MenuController {
     private Trainer trainer;
     private Member member;
     private boolean registerd;
-    private boolean loggedIn;
+    private boolean memLoggedIn = false;
+    private boolean trainLoggedIn = false;
+    private boolean userLoggedIn = false;
     private String userType;
     private boolean emailCorrect = false;
+    String email;
     boolean matches = true;
     public MenuController() {
 
@@ -75,6 +78,26 @@ public class MenuController {
 
     }
 
+    private String trainMenu() {
+        System.out.println("Please choose from one of the following options:");
+        System.out.println("OPTION \t \t \t \t \t DESCRIPTION"
+                +"\n A  \t \t \t \t \t  To add a new member press A"
+                +"\n L  \t \t \t \t \t  To list all members press L"
+                +"\n S  \t \t \t \t \t  To search for a member press S"
+                +"\n O  \t \t \t \t \t  To list options for assessments press O");
+
+        do {
+            try {
+                System.out.print("==>> ");
+                return input.nextLine();
+            } catch (Exception e) {
+                input.nextLine();  //swallows Scanner bug
+                System.out.println("Something went Wrong, please try again");
+            }
+        } while (true);
+
+    }
+
     /**
      * run() - This method displays the menu and processes the user's menu
      * choice.  Option "L" lets the user Login, Option "R" lets the user Register,
@@ -88,38 +111,54 @@ public class MenuController {
                     System.out.println("You have chosen to Login");
                     System.out.println("To Login as a Member please enter M, to Login as a Trainer please enter T");
                     userType = input.nextLine();
-                    while(!loggedIn) {
+
+                    while (!userLoggedIn) {
+                        //while (!memLoggedIn) {
                         switch (userType.toUpperCase()) {
                             case "M":
                                 System.out.println("Please enter your email address");
                                 String email = input.nextLine();
                                 try {
 
-                                     member = authenticateAsMember(email);//authenticate member
-                                    if(member.getEmail() == null){
+                                    member = authenticateAsMember(email);//authenticate member
+                                    if (member.getEmail() == null) {
                                         System.out.println("You have not been recognised as a member on our system");
                                         System.out.println("If you are registered, please try re-typing your email address,otherwise please return to the main menu and register");
                                     }
                                     System.out.println("Hello " + member.getName());
-                                }
-                                catch(Exception e){
+                                } catch (Exception e) {
                                     System.out.println("You have not been recognised as a member on our system");
                                     System.out.println("If you are registered, please try re-typing your email address,otherwise please return to the main menu and register");
                                 }
+
                                 break;
                             case "T":
-                                registerTrainer(); //authenticate trainer
-                                break;
-                            default:
+                                System.out.println("Please enter your email address");
+                                email = input.nextLine();
+                                try {
+
+                                    trainer = authenticateAsTrainer(email);//authenticate member
+                                    if (trainer.getEmail() == null) {
+                                        System.out.println("You have not been recognised as a trainer on our system");
+                                        System.out.println("If you are registered, please try re-typing your email address,otherwise please return to the main menu and register");
+                                    }
+                                    System.out.println("Hello " + trainer.getName());
+                                } catch (Exception e) {
+                                    System.out.println("You have not been recognised as a trainer on our system");
+                                    System.out.println("If you are registered, please try re-typing your email address,otherwise please return to the main menu and register");
+                                }
+
                                 break;
 
+                            default:
+                                break;
                         }
-                       // System.out.println("Press enter to continue");
-                       // loggedIn=false;
-                       // input.nextLine();
-                       // run();
-                    }//here we have options for the logged in member
-                while(loggedIn) {
+                        }
+
+
+                    //here we have options for the logged in member
+
+                while(memLoggedIn) {
                     String memOp = memMenu();
                     switch (memOp.toUpperCase()) {
                         case "V":
@@ -138,23 +177,77 @@ public class MenuController {
                             break;
                         case "U":
                             System.out.println("You have chosen to update your profile:");
+                            try {
+
+                                System.out.println("To update your name press.....");
+
+                            }
+                            catch(Exception e){
+                                System.out.println("Something went wrong");
+
+                            }
                             break;
                         case "P":
                             System.out.println("You have chosen to view your progress:");
                             break;
                         case "L":
-                            System.out.println("You have logged out");
-                            loggedIn = false;
-                            mainMenu();
+                            System.out.println("You have logged out, please press enter to see a menu");
+                            input.nextLine();
+                            userLoggedIn=false;
+                           // mainMenu();
                             break;
                         default:
+                            //memMenu();
                             break;
 
                     }
                     System.out.println("Press enter to continue");
-                    loggedIn=false;
                     input.nextLine();
-                    memMenu();
+                    //memMenu();
+                }
+                while(trainLoggedIn) {
+                    String trainOp = trainMenu();
+                    switch (trainOp.toUpperCase()) {
+                        case "A"://add member
+                            System.out.println("You have chosen to add a member:");
+                            /*System.out.println("Please press enter to show your profile:");
+                            input.nextLine();
+                            try {
+
+                                System.out.println( member.toString());
+
+                            }
+                            catch(Exception e){
+                                System.out.println("Something went wrong");
+
+                            }*/
+                            break;
+                        case "L"://list members
+                            System.out.println("You have chosen to list all members:");
+                           /* try {
+
+                                System.out.println("To update your name press.....");
+
+                            }
+                            catch(Exception e){
+                                System.out.println("Something went wrong");
+
+                            }*/
+                            break;
+                        case "S"://search member
+                            System.out.println("You have chosen to search for a member");
+                            break;
+                        case "O"://sub option for assessments
+                            System.out.println("You have chosen to see assessment options");
+                            break;
+                        default:
+                            //memMenu();
+                            break;
+
+                    }
+                    System.out.println("Press enter to continue");
+                    input.nextLine();
+                    //memMenu();
                 }
                 break;
                 case "R":
@@ -197,6 +290,7 @@ public class MenuController {
         System.out.println("Exiting... bye");
         System.out.println("");
     }
+
 
     private void registerMember() {
 
@@ -305,16 +399,32 @@ public class MenuController {
 
 
  private Member authenticateAsMember(String email) {
-     loggedIn = false;
+     userLoggedIn=false;
+     memLoggedIn=false;
      Member member = null;
      if (emailExists(email)) {
          //gym.searchMembersByEmail(email);//authenticate member
          member = new Member(gym.searchMembersByEmail(email).getEmail(),gym.searchMembersByEmail(email).getName(),gym.searchMembersByEmail(email).getAddress(),gym.searchMembersByEmail(email).getGender(),
                  gym.searchMembersByEmail(email).getHeight(),gym.searchMembersByEmail(email).getWeight(),gym.searchMembersByEmail(email).getChosenPackage());
-         loggedIn = true;
+         userLoggedIn=true;
+         memLoggedIn=true;
      }
      return member;
  }
+
+    private Trainer authenticateAsTrainer(String email) {
+        userLoggedIn=false;
+        trainLoggedIn=false;
+        Trainer trainer = null;
+        if (emailExists(email)) {
+            //gym.searchMembersByEmail(email);//authenticate member
+            trainer = new Trainer(gym.searchTrainersByEmail(email).getEmail(),gym.searchTrainersByEmail(email).getName(),gym.searchTrainersByEmail(email).getAddress(),gym.searchTrainersByEmail(email).getGender(),gym.searchTrainersByEmail(email).getSpeciality());
+
+            userLoggedIn=true;
+            trainLoggedIn=true;
+        }
+        return trainer;
+    }
     //This needs to be a hasMap
     /*
     ("Package 1", "Allowed access anytime to gym.\nFree access to all classes.\nAccess to all changing areas including deluxe changing rooms.");

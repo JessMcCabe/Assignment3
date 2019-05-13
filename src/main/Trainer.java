@@ -1,5 +1,6 @@
 public class Trainer extends Person  {
 
+
     private String speciality;
 
     public Trainer(String email, String name, String address, String gender, String speciality) {
@@ -12,5 +13,13 @@ public class Trainer extends Person  {
         return "Trainer{" +
                 "speciality='" + speciality + '\'' +
                 '}' + " " + super.toString();
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 }
