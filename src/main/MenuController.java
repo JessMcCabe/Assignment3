@@ -236,18 +236,13 @@ public class MenuController {
                             break;
                         case "L"://list members
                             System.out.println("You have chosen to list all members:");
-                           /* try {
-
-                                System.out.println("To update your name press.....");
-
-                            }
-                            catch(Exception e){
-                                System.out.println("Something went wrong");
-
-                            }*/
+                            System.out.println(gym.getMembers().toString());
                             break;
                         case "S"://search member
                             System.out.println("You have chosen to search for a member");
+                            System.out.println("Please enter the email address for the member you wish to view:");
+                            email = input.nextLine();
+                            System.out.println(gym.searchMembersByEmail(email));
                             break;
                         case "O"://sub option for assessments
                             System.out.println("You have chosen to see assessment options");
