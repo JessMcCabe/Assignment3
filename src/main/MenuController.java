@@ -19,7 +19,7 @@ public class MenuController {
     private GymAPI gym;
     private Trainer trainer;
     private Member member;
-    private boolean registerd;
+    private boolean registered;
     private boolean memLoggedIn = false;
     private boolean trainLoggedIn = false;
     private boolean userLoggedIn = false;
@@ -27,23 +27,19 @@ public class MenuController {
     private boolean emailCorrect = false;
     String email;
     boolean matches = true;
+
+
+
     public MenuController() {
 
 
         input = new Scanner(System.in);
         gym = new GymAPI();
 
-
     }
 
     public static void main(String args[]) {
         //This needs to be a hasMap
-        HashMap<String, String>memberPackages =  new HashMap<>();
-
-        memberPackages.put("Package 1","Allowed access anytime to gym.\n Free access to all classes.\nAccess to all changing areas including deluxe changing rooms.");
-        memberPackages.put("Package 2", "Allowed access anytime to gym.\n€3 fee for all classes.\nAccess to all changing areas including deluxe changing rooms.");
-        memberPackages.put("Package 3", "Allowed access to gym at off-peak times. \n €5 fee for all classes. \n No access to deluxe changing rooms.");
-        memberPackages.put("WIT", "Allowed access to gym during term time. \n €4 fee for all classes.  \n No access to deluxe changing rooms.");
 
         MenuController app = new MenuController();
         app.populateGym();
@@ -52,6 +48,8 @@ public class MenuController {
 
     //make this the main menu and when we know if it is a member or trainer we then call the appropriate submenu
     private String mainMenu() {
+
+
         System.out.println("Welcome To Play Gym Online");
         System.out.println("  1) To Login press L , to register, press R");
         do {
@@ -112,6 +110,13 @@ public class MenuController {
      * Option "CLOSE" exits the app
      */
     private void run() {
+        HashMap<String, String>memberPackages =  new HashMap<>();
+
+        memberPackages.put("Package 1","Allowed access anytime to gym.\n Free access to all classes.\nAccess to all changing areas including deluxe changing rooms.");
+        memberPackages.put("Package 2", "Allowed access anytime to gym.\n€3 fee for all classes.\nAccess to all changing areas including deluxe changing rooms.");
+        memberPackages.put("Package 3", "Allowed access to gym at off-peak times. \n €5 fee for all classes. \n No access to deluxe changing rooms.");
+        memberPackages.put("WIT", "Allowed access to gym during term time. \n €4 fee for all classes.  \n No access to deluxe changing rooms.");
+
         String option = mainMenu();
         while (!option.equals("close")) {
             switch (option.toUpperCase()) {
@@ -167,6 +172,7 @@ public class MenuController {
                     //here we have options for the logged in member
 
                 while(memLoggedIn) {
+
                     String memOp = memMenu();
                     switch (memOp.toUpperCase()) {
                         case "V":
@@ -176,6 +182,7 @@ public class MenuController {
                             try {
 
                                 System.out.println( member.toString());
+                                System.out.println("Your Package details are as follows:  \n" + memberPackages.get("Package 2"));
 
                             }
                             catch(Exception e){
@@ -218,17 +225,35 @@ public class MenuController {
                     switch (trainOp.toUpperCase()) {
                         case "A"://add member
                             System.out.println("You have chosen to add a member:");
-                            /*System.out.println("Please press enter to show your profile:");
-                            input.nextLine();
+                            System.out.println("Please enter the members full name:");
+                            String memName = input.nextLine();
+                            System.out.println("Please enter the members email address:");
+                            String memEmail = input.nextLine();
+                            System.out.println("Please enter the members address:");
+                            String memAddress = input.nextLine();
+                            System.out.println("Please enter the members chosen package");
+                            String memPackage = input.nextLine();
+                            System.out.println("Please enter the members gender:");
+                            String memGender = input.nextLine();
+                            System.out.println("Please enter the members height in Meters:");
+                            float memHeight = input.nextFloat();
+                            System.out.println("Please enter the members weight in Kg:");
+                            float memWeight = input.nextFloat();
+
+
+
                             try {
-
-                                System.out.println( member.toString());
-
+                                Member newMember = new Member(memEmail,memName,memAddress,memGender.toUpperCase(),memHeight,memWeight,memPackage);
+                                gym.addPerson(newMember);
+                                gym.save();
+                                System.out.println("You have created a new member as follows: " + newMember.toString());
+                                System.out.println("Press Enter to complete member entry");
+                                input.nextLine();
                             }
                             catch(Exception e){
                                 System.out.println("Something went wrong");
 
-                            }*/
+                            }
                             break;
                         case "L"://list members
                             System.out.println("You have chosen to list all members:");
@@ -262,7 +287,7 @@ public class MenuController {
                     System.out.println("You have chosen to Register");
                     System.out.println("To Register as a Member please enter M, to Register as a Trainer please enter T");
                     userType = input.nextLine();
-                    while(!registerd) {
+                    while(!registered) {
                         switch (userType.toUpperCase()) {
                             case "M":
                                 registerMember();
@@ -275,7 +300,7 @@ public class MenuController {
 
                         }
                         System.out.println("Press enter to continue");
-                        registerd=false;
+                        registered=false;
                          input.nextLine();
                         run();
                     }
@@ -302,7 +327,7 @@ public class MenuController {
 
     private void registerMember() {
 
-        registerd = false;
+        registered = false;
         Person personPart = registerUser();
 
         System.out.println("Please enter your chosen Package");
@@ -313,7 +338,7 @@ public class MenuController {
         float startWeight = input.nextFloat();
         System.out.println("All filled in ");
         input.nextLine();
-        registerd= true;
+        registered= true;
         member = new Member(personPart.getEmail(),personPart.getName(), personPart.getAddress(),
                 personPart.getGender(), height, startWeight, chosenPackage);
         gym.addPerson(member);
@@ -328,7 +353,7 @@ public class MenuController {
 
 
     private void registerTrainer(){
-            registerd= false;
+        registered= false;
 
             Person personPart = registerUser();
 
@@ -337,7 +362,7 @@ public class MenuController {
             System.out.println("All filled in ");
 
             //input.nextLine();
-            registerd = true;
+        registered = true;
             trainer = new Trainer(personPart.getEmail(), personPart.getName(), personPart.getAddress(), personPart.getGender(),speciality);
             gym.addPerson(trainer);
 

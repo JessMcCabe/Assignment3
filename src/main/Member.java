@@ -33,7 +33,7 @@ public class Member extends Person {
     public void setHeight(float height) {
         if (height >= 1 & height <= 3) {
             if (height % 2 != 0) {
-                this.height = Math.round(height);
+                this.height = Math.round(height);//should not round
             } else {
                 this.height = height;
             }
@@ -62,7 +62,7 @@ public class Member extends Person {
     public void setStartWeight(float startWeight) {
         if (startWeight >= 35 & startWeight <= 250) {
             if (startWeight % 2 != 0) {
-                this.startWeight = Math.round(startWeight);
+                this.startWeight = Math.round(startWeight);//should not round
             } else {
                 this.startWeight = startWeight;
             }
@@ -136,7 +136,7 @@ public class Member extends Person {
                 "\n Height:" + "\t"+"\t" +"\t" + height +
                 " \n Start Weight:" + "\t"+"\t" +weight +
                 " \n Chosen Package:" + "\t" +chosenPackage +
-                " \n Gender:" + "\t"+"\t"+"\t" +gender +
+                " \n Gender:" + "\t"+"\t"+"\t" +gender + //this needs to print male or female depending of F or M
                 " \n Email Address:" + "\t"+"\t" +super.getEmail() +
                  " \n Address:" + "\t"+"\t" +"\t"+super.getAddress() + "\n";
     }
