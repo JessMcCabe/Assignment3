@@ -224,31 +224,10 @@ public class MenuController {
                     String trainOp = trainMenu();
                     switch (trainOp.toUpperCase()) {
                         case "A"://add member
-                            System.out.println("You have chosen to add a member:");
-                            System.out.println("Please enter the members full name:");
-                            String memName = input.nextLine();
-                            System.out.println("Please enter the members email address:");
-                            String memEmail = input.nextLine();
-                            System.out.println("Please enter the members address:");
-                            String memAddress = input.nextLine();
-                            System.out.println("Please enter the members chosen package");
-                            String memPackage = input.nextLine();
-                            System.out.println("Please enter the members gender:");
-                            String memGender = input.nextLine();
-                            System.out.println("Please enter the members height in Meters:");
-                            float memHeight = input.nextFloat();
-                            System.out.println("Please enter the members weight in Kg:");
-                            float memWeight = input.nextFloat();
-
-
 
                             try {
-                                Member newMember = new Member(memEmail,memName,memAddress,memGender.toUpperCase(),memHeight,memWeight,memPackage);
-                                gym.addPerson(newMember);
-                                gym.save();
-                                System.out.println("You have created a new member as follows: " + newMember.toString());
-                                System.out.println("Press Enter to complete member entry");
-                                input.nextLine();
+                            trainerAddMember();
+                           input.nextLine();
                             }
                             catch(Exception e){
                                 System.out.println("Something went wrong");
@@ -459,5 +438,37 @@ public class MenuController {
         return trainer;
     }
 
+
+    private Member trainerAddMember(){
+
+        System.out.println("You have chosen to add a member:");
+        System.out.println("Please enter the members full name:");
+        String memName = input.nextLine();
+        System.out.println("Please enter the members email address:");
+        String memEmail = input.nextLine();
+        System.out.println("Please enter the members address:");
+        String memAddress = input.nextLine();
+        System.out.println("Please enter the members chosen package");
+        String memPackage = input.nextLine();
+        System.out.println("Please enter the members gender:");
+        String memGender = input.nextLine();
+        System.out.println("Please enter the members height in Meters:");
+        float memHeight = input.nextFloat();
+        System.out.println("Please enter the members weight in Kg:");
+        float memWeight = input.nextFloat();
+
+        Member newMember = new Member(memEmail,memName,memAddress,memGender.toUpperCase(),memHeight,memWeight,memPackage);
+        gym.addPerson(newMember);
+        try {
+            gym.save();
+        }
+        catch
+            (Exception e){
+
+                System.out.println("Error saving member to system");
+            }
+        System.out.println("You have created a new member as follows: " + newMember.toString());
+        return newMember;
+    }
 }
 
