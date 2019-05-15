@@ -32,12 +32,15 @@ public class Member extends Person {
     //height must be between 1 and 3
     public void setHeight(float height) {
         if (height >= 1 & height <= 3) {
-            if (height % 2 != 0) {
-                this.height = Math.round(height);//should not round
-            } else {
+            //if (height % 2 != 0) {
+              //  this.height = Math.round(height);//should not round
+            //} else {
                 this.height = height;
             }
-        } else this.height = 0;
+
+        else {
+            this.height = 0;
+        }
     }
 
     public float getWeight() {
@@ -46,13 +49,15 @@ public class Member extends Person {
     //startWeight must be bewteen 35 and 250
     public void setWeight(float weight) {
         if (weight >= 35 & weight <= 250) {
-            if (weight % 2 != 0) {
-                this.weight = Math.round(weight);
-            } else {
+            //if (weight % 2 != 0) {
+                //this.weight = Math.round(weight);
+           // } else {
                 this.weight = weight;
             }
+       // }
+        else {
+            this.weight =0;
         }
-        else this.weight =0;
     }
 
     public float getStartWeight() {
@@ -61,13 +66,15 @@ public class Member extends Person {
     //startWeight must be bewteen 35 and 250
     public void setStartWeight(float startWeight) {
         if (startWeight >= 35 & startWeight <= 250) {
-            if (startWeight % 2 != 0) {
-                this.startWeight = Math.round(startWeight);//should not round
-            } else {
+           // if (startWeight % 2 != 0) {
+               // this.startWeight = Math.round(startWeight);//should not round
+            //} else {
                 this.startWeight = startWeight;
             }
+      //  }
+        else {
+            this.startWeight =0;
         }
-        else this.startWeight =0;
     }
 
     public String getChosenPackage() {

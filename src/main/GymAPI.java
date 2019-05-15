@@ -20,7 +20,7 @@ public class GymAPI {
     private static double inchesOver;
     private static float weightAllowed;
 
-private static GymUtility gymUtility = new GymUtility();
+    private static GymUtility gymUtility = new GymUtility();
 
     public GymAPI() {
         this.persons = new ArrayList<Person>();
@@ -35,58 +35,59 @@ private static GymUtility gymUtility = new GymUtility();
 
 
     }
+
     public ArrayList<Trainer> getTrainers() {
         return trainers;
     }
+
     public ArrayList<Person> getPersons() {
         splitPersons();
         return persons;
 
     }
 
-    public void splitPersons(){
+    public void splitPersons() {
 
         for (Person person : persons) {
             if (person instanceof Member) {
-                members.add((Member)person);
+                members.add((Member) person);
             } else if (person instanceof Trainer) {
-                trainers.add((Trainer)person);
+                trainers.add((Trainer) person);
             }
         }
     }
 
     public void addMember(Member member) {
-                members.add(member);
+        members.add(member);
     }
 
     public void addTrainer(Trainer trainer) {
-                trainers.add(trainer);
+        trainers.add(trainer);
     }
+
     public void addPerson(Person person) {
-                persons.add(person);
+        persons.add(person);
     }
 
     public int numberOfMembers() {
-       if(members.size() !=0){
-           return members.size();
-       }
-       else {
-           return 0;
-       }
+        if (members.size() != 0) {
+            return members.size();
+        } else {
+            return 0;
+        }
     }
 
     public int numberOfTrainerss() {
-        if(trainers.size() !=0){
+        if (trainers.size() != 0) {
             return trainers.size();
-        }
-        else {
+        } else {
             return 0;
         }
     }
 
     public boolean isValidMemberIndex(int index) {
 
-        if (index <= members.size()-1 &!members.isEmpty()) {
+        if (index <= members.size() - 1 & !members.isEmpty()) {
             return true;
         } else {
             return false;
@@ -94,7 +95,7 @@ private static GymUtility gymUtility = new GymUtility();
     }
 
     public boolean isValidTrainerIndex(int index) {
-        if (index <= trainers.size()-1 & !trainers.isEmpty()) {
+        if (index <= trainers.size() - 1 & !trainers.isEmpty()) {
             return true;
         } else {
             return false;
@@ -102,15 +103,15 @@ private static GymUtility gymUtility = new GymUtility();
     }
 
 
-    public Member searchMembersByEmail(String email){
+    public Member searchMembersByEmail(String email) {
         Member member = null;
         ArrayList<Member> members = new ArrayList<Member>();
         members = getMembers();
 
         //check if the email already exists
-        for(int i = 0; i<members.size(); i ++){
+        for (int i = 0; i < members.size(); i++) {
 
-            if(members.get(i).getEmail().equals(email)){
+            if (members.get(i).getEmail().equals(email)) {
 
                 member = members.get(i);
                 //break;
@@ -120,16 +121,16 @@ private static GymUtility gymUtility = new GymUtility();
         return member;
 
 
-}
+    }
 
-    public ArrayList<String> searchMembersByName(String name){
+    public ArrayList<String> searchMembersByName(String name) {
         ArrayList<String> member = new ArrayList<>();
         ArrayList<Member> members = members = getMembers();
 
         //check if the email already exists
-        for(int i = 0; i<members.size(); i ++){
+        for (int i = 0; i < members.size(); i++) {
 
-            if(members.get(i).getName().contains(name)){
+            if (members.get(i).getName().contains(name)) {
 
                 member.add(members.get(i).getName());
                 //break;
@@ -141,13 +142,13 @@ private static GymUtility gymUtility = new GymUtility();
 
     }
 
-    public Trainer searchTrainersByEmail(String email){
+    public Trainer searchTrainersByEmail(String email) {
         Trainer trainer = null;
         ArrayList<Trainer> trainers = trainers = getTrainers();
 
         //check if the email already exists
-        for(int i = 0; i<trainers.size(); i ++){
-            if(trainers.get(i).getEmail().equals(email)){
+        for (int i = 0; i < trainers.size(); i++) {
+            if (trainers.get(i).getEmail().equals(email)) {
                 trainer = trainers.get(i);
             }
         }
@@ -155,14 +156,14 @@ private static GymUtility gymUtility = new GymUtility();
 
     }
 
-    public ArrayList<String> searchTrainersByName(String name){
+    public ArrayList<String> searchTrainersByName(String name) {
         ArrayList<String> trainer = new ArrayList<>();
         ArrayList<Trainer> trainers = trainers = getTrainers();
 
         //check if the email already exists
-        for(int i = 0; i<trainers.size(); i ++){
+        for (int i = 0; i < trainers.size(); i++) {
 
-            if(trainers.get(i).getName().contains(name)){
+            if (trainers.get(i).getName().contains(name)) {
 
                 trainer.add(trainers.get(i).getName());
                 //break;
@@ -178,9 +179,9 @@ private static GymUtility gymUtility = new GymUtility();
         ArrayList<Member> members = getMembers();
         ArrayList<Member> membersWithIdealWeight = new ArrayList<>();
         for (int i = 0; i < members.size(); i++) {
-        if(gymUtility.isIdealBodyWeight(members.get(i),members.get(i).latestAssessment())) {
-            membersWithIdealWeight.add(members.get(i));
-        }
+            if (gymUtility.isIdealBodyWeight(members.get(i), members.get(i).latestAssessment())) {
+                membersWithIdealWeight.add(members.get(i));
+            }
 
         }
 
@@ -189,7 +190,7 @@ private static GymUtility gymUtility = new GymUtility();
     }
 
 
-    public ArrayList<Member>  listMembersBySpecificBMICategory(String category){
+    public ArrayList<Member> listMembersBySpecificBMICategory(String category) {
 
         ArrayList<Member> members = new ArrayList<>();
         members = getMembers();
@@ -198,13 +199,46 @@ private static GymUtility gymUtility = new GymUtility();
     }
 
 
-    public String listMemberDetailsImperialAndMetric(){
-        String member = "";
+    public String listMemberDetailsImperialAndMetric() {
+        String memberImperialAndMetric = "";
         ArrayList<Member> members = new ArrayList<>();
         members = getMembers();
-        return member;
+        if(members.size()>0) {
+            //for all members , get their weight and height and name and add it to the string members, seperate each member with a new line
+            for (Member member : members) {
+                //get the metric for and build the string
+                memberImperialAndMetric = member.getName() + ": " + Float.toString(member.getWeight()) + " kg (" + Float.toString(kgToLb(member.getWeight())) + " lbs)" +
+                        Float.toString(member.getHeight()) + " metres (" + Float.toString(mtToInch(member.getHeight())) + " inches)" +  " \n"; //convert float to string!
+
+            }
+        }
+        else if(members.size()<=0)
+        {
+            memberImperialAndMetric ="No registered members";
+        }
+        return memberImperialAndMetric;
         //TO-DO
     }
+
+    public float kgToLb(float kg) {
+        float lb = 0.0f;
+        //1 kg = 2.20462262185 lb
+        float mult = 2.20462262185f;
+        lb = kg * mult;
+
+        return lb;
+    }
+
+    public float mtToInch(float mt) {
+        float inch = 0.0f;
+        //1 m is equivalent to 1.0936 yards, or 39.370 inches
+        float mult = 39.370f;
+        inch = mt * mult;
+
+        return inch;
+    }
+
+
 
 
     @SuppressWarnings("unchecked")
