@@ -212,7 +212,7 @@ private static GymUtility gymUtility = new GymUtility();
     {
         XStream xstream = new XStream(new DomDriver());
         // ------------------ PREVENT SECURITY WARNINGS---------------------------
-        Class<?>[] classes = new Class[] { Person.class,Member.class,Trainer.class }; // The Classes we are reading in
+        Class<?>[] classes = new Class[] { Person.class,Member.class,Trainer.class,Assessment.class }; // The Classes we are reading in
         XStream.setupDefaultSecurity(xstream);
         xstream.allowTypes(classes);
         // -----------------------------------------------------------------------

@@ -104,6 +104,25 @@ public class MenuController {
 
     }
 
+    private String assessMenu() {
+        System.out.println("Please choose from one of the following options:");
+        System.out.println("OPTION \t \t \t \t \t DESCRIPTION"
+                +"\n A  \t \t \t \t \t  To add an assessment for a member press A"
+                +"\n C  \t \t \t \t \t  To comment on an assessment press C"
+                );
+
+        do {
+            try {
+                System.out.print("==>> ");
+                return input.nextLine();
+            } catch (Exception e) {
+                input.nextLine();  //swallows Scanner bug
+                System.out.println("Something went Wrong, please try again");
+            }
+        } while (true);
+
+    }
+
     /**
      * run() - This method displays the menu and processes the user's menu
      * choice.  Option "L" lets the user Login, Option "R" lets the user Register,
@@ -246,7 +265,41 @@ public class MenuController {
                             break;
                         case "O"://sub option for assessments
                             System.out.println("You have chosen to see assessment options");
-                            break;
+                            String assessOp =assessMenu();
+                            switch (assessOp.toUpperCase()) {
+                                case "A":
+                                    System.out.println("You have chosen to add an assessment for a member");
+                                    //ask the trainer which member they are adding an assessment for
+                                    System.out.println("Please enter the email address of the member:");
+                                    email = input.nextLine();
+                                    System.out.println("You are about to add an assessment for " + gym.searchMembersByEmail(email).getName());
+                                    member = gym.searchMembersByEmail(email);
+                                    System.out.println("Comment");
+                                    String comment = input.nextLine();
+                                    System.out.println("Weight in Kg");
+                                    float weight = input.nextFloat();
+                                    System.out.println("Thigh in CM");
+                                    float thigh = input.nextFloat();
+                                    System.out.println("Waist in CM");
+                                    float waist = input.nextFloat();
+                                    System.out.println(" You have entered " + weight + " " + thigh + " " + waist + " " + comment + " ." );
+                                    try {
+                                        member.assessments.put("15/05/2019", new Assessment(weight, thigh, waist, comment));
+                                        gym.save();
+                                    }
+                                    catch(Exception e ) {
+                                        System.out.println("Something went wrong saving the assessment" );
+                                    }
+
+                                    System.out.println(member.toString());
+                                    break;
+                                case "C":
+                                    System.out.println("You have chosen to add a comment on an assessment");
+                                    break;
+                                default:
+                                    break;
+                            }//add an option to go back up to the previous menu
+                         break;
                         default:
                             //memMenu();
                             break;
