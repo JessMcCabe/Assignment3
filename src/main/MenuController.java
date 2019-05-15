@@ -295,6 +295,32 @@ public class MenuController {
                                     break;
                                 case "C":
                                     System.out.println("You have chosen to add a comment on an assessment");
+                                    //get the assessment based on the date string from when it was entered
+                                    System.out.println("Please enter the email address of the member:");
+                                    email = input.nextLine();
+                                    member = gym.searchMembersByEmail(email);
+                                    //if you know the date or else list all assessments
+                                    System.out.println("If you know the assessment you want to comment on press Y,else press N to view all assessments");
+                                    String known = input.nextLine();
+                                    switch (known.toUpperCase()) {
+                                        case "Y":
+                                            break;
+                                        case "N":
+                                            System.out.println("The assessments for " + member.getName() + " are as follows: " + member.assessments.keySet());
+                                            break;
+                                    }
+                                    System.out.println("Please enter the date of the assessment");
+                                    String date = input.nextLine();
+                                    //date = input.nextLine();
+                                    System.out.println("Please enter the comment that you wish to add to this assessment");
+                                    comment = input.nextLine();
+                                    try {
+                                        member.getAssessments().get(date).setComment(comment);
+                                        gym.save();
+                                    }
+                                    catch(Exception e){
+                                        System.out.println("Something went wrong adding the comment");
+                                }
                                     break;
                                 default:
                                     break;
