@@ -275,7 +275,7 @@ public class MemberTest {
             @Test
             public void sorted() {
                 SortedSet<String> result = member1.sortedAssessmentDates();
-                assertSame("18/01/03", result.last(), "Last date not correct");
+                assertTrue(result.last()  == "18/01/03",  "Last date not correct");
                 assertTrue(result.first() == "18/01/01", "First date not correct");
             }
         }

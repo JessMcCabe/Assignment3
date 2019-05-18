@@ -213,8 +213,53 @@ public class MenuController {
                             System.out.println("You have chosen to update your profile:");
                             try {
 
-                                System.out.println("To update your name press.....");
+                                System.out.println("Do you wish to update your name? Y/N");
+                                String decision = input.nextLine();
+                                switch (decision.toUpperCase()) {
+                                    case "Y":
+                                        System.out.println("Please enter your new full name:");
+                                        String name = input.nextLine();
+                                        member.setName(name);
+                                        break;
+                                    case "N":
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                System.out.println("Do you wish to update your email address? Y/N");
 
+
+                                    System.out.println("Do you wish to update your name? Y/N");
+                                     decision = input.nextLine();
+                                    switch (decision.toUpperCase()) {
+                                        case "Y":
+                                            System.out.println("Please enter your new email address:");
+                                            email = input.nextLine();
+                                            member.setEmail(email);
+                                            break;
+                                        case "N":
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+                                System.out.println("Do you wish to update your email address? Y/N");
+
+
+                                System.out.println("Do you wish to update your gender? Y/N");
+                                decision = input.nextLine();
+                                switch (decision.toUpperCase()) {
+                                    case "Y":
+                                        System.out.println("Please enter your new gender (M for Male, F for Female or Unspecified for other:");
+                                        String gender = input.nextLine();
+                                        member.setGender(gender);
+                                        break;
+                                    case "N":
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            gym.save();
                             }
                             catch(Exception e){
                                 System.out.println("Something went wrong");

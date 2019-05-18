@@ -114,6 +114,9 @@ public class Member extends Person {
         return assessments;
     }
 
+    public void setEmail(String email){
+        super.setEmail(email);
+    }
 
    public SortedSet<String> sortedAssessmentDates() {
 
