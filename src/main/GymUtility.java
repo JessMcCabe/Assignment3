@@ -15,7 +15,7 @@ public class GymUtility {
 
     }
 
-    public static String determineBMICategory(float bmiValue){
+    public static String determineBMICategory(double bmiValue){
         String category = "";
 
 

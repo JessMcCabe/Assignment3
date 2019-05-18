@@ -179,8 +179,10 @@ public class GymAPI {
         ArrayList<Member> members = getMembers();
         ArrayList<Member> membersWithIdealWeight = new ArrayList<>();
         for (int i = 0; i < members.size(); i++) {
-            if (gymUtility.isIdealBodyWeight(members.get(i), members.get(i).latestAssessment())) {
-                membersWithIdealWeight.add(members.get(i));
+            if(!members.get(i).getAssessments().isEmpty()) {
+                if (gymUtility.isIdealBodyWeight(members.get(i), members.get(i).latestAssessment())) {
+                    membersWithIdealWeight.add(members.get(i));
+                }
             }
 
         }
@@ -192,10 +194,15 @@ public class GymAPI {
 
     public ArrayList<Member> listMembersBySpecificBMICategory(String category) {
 
-        ArrayList<Member> members = new ArrayList<>();
-        members = getMembers();
-        return members;
-        //TO-DO
+        ArrayList<Member> members =  getMembers();
+        ArrayList<Member> membersByBMI = new ArrayList<>();
+        for(int i = 0; i <members.size(); i ++) {
+             double BMI = gymUtility.calculateBMI(members.get(i),members.get(i).latestAssessment());
+            if(gymUtility.determineBMICategory(BMI).toUpperCase().contains(category.toUpperCase())){
+                membersByBMI.add(members.get(i));
+            }
+        }
+        return membersByBMI;
     }
 
 
