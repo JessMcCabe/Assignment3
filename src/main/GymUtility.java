@@ -46,34 +46,34 @@ public class GymUtility {
 
     public static boolean isIdealBodyWeight(Member member, Assessment assessment) {
         boolean ideal = false;
-        if (member.getGender().toUpperCase().equals("MALE")) {//if the member is male
+        if (member.getGender().toUpperCase().equals("M")) {//if the member is male
             if (heightToFeet(member.getHeight()) <= 5) {
 
-                if (assessment.getWeight() <= 52 & assessment.getWeight() >= 48) {
+                if (Math.abs(assessment.getWeight() -50) <= 0.3) {
                     ideal = true;
                 }
             } else if (heightToFeet(member.getHeight()) > 5) {
 
-                inchesOver = (heightToFeet(member.getHeight()) - 5) * 10;
+                inchesOver = (heightToFeet(member.getHeight()) - 5) * 12;
                 weightAllowed = (maleBaseWeight + ((float) inchesOver * additionalWeight));
-                if (assessment.getWeight() <= weightAllowed) {
+                if (Math.abs(assessment.getWeight() - weightAllowed) <=0.3) {//https://stackoverflow.com/questions/10264313/java-if-statement-a-is-equal-to-b-plus-or-minus-2
 
                     ideal = true;
                 }
             }
 
 
-        } else if (member.getGender().toUpperCase().equals("FEMALE")) {//if the member is female
+        } else if (member.getGender().toUpperCase().equals("F") | (member.getGender().toUpperCase().equals("UNSPECIFIED"))) {//if the member is female
             if (heightToFeet(member.getHeight()) <= 5) {
 
-                if (assessment.getWeight() <= 47.5 & assessment.getWeight() >= 43.5) {
+                if (Math.abs(assessment.getWeight() -45.5) <=0.3) {
                     ideal = true;
                 }
             } else if (heightToFeet(member.getHeight()) > 5) {
 
-                inchesOver = (heightToFeet(member.getHeight()) - 5) * 10;
+                inchesOver = (heightToFeet(member.getHeight()) - 5) * 12;
                 weightAllowed = (femaleBaseWeight + ((float) inchesOver * additionalWeight));
-                if (assessment.getWeight() <= (weightAllowed + 2) & assessment.getWeight() >= (weightAllowed - 2)) {
+                if (Math.abs(assessment.getWeight() - weightAllowed) <=0.3) {
 
                     ideal = true;
                 }
