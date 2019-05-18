@@ -207,8 +207,8 @@ public class GymAPI {
             //for all members , get their weight and height and name and add it to the string members, seperate each member with a new line
             for (Member member : members) {
                 //get the metric for and build the string
-                memberImperialAndMetric = member.getName() + ": " + Float.toString(member.getWeight()) + " kg (" + Float.toString(kgToLb(member.getWeight())) + " lbs)" +
-                        Float.toString(member.getHeight()) + " metres (" + Float.toString(mtToInch(member.getHeight())) + " inches)" +  " \n"; //convert float to string!
+                memberImperialAndMetric = memberImperialAndMetric + member.getName() + ": " + (int)(float)Math.round(member.getWeight()) + " kg (" + (int)(kgToLb(member.getWeight())) + " lbs)" +
+                        Float.toString((float)Math.round(member.getHeight()*10)/10) + " metres (" + (int)(float)Math.round(mtToInch(member.getHeight())) + " inches)" +  " \n"; //convert float to string!
 
             }
         }
@@ -226,7 +226,7 @@ public class GymAPI {
         float mult = 2.20462262185f;
         lb = kg * mult;
 
-        return lb;
+        return (float)Math.round(lb);
     }
 
     public float mtToInch(float mt) {
@@ -235,7 +235,7 @@ public class GymAPI {
         float mult = 39.370f;
         inch = mt * mult;
 
-        return inch;
+        return (float)Math.round(inch *10)/10;
     }
 
 

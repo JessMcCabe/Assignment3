@@ -307,6 +307,9 @@ public class MenuController {
                                             break;
                                         case "N":
                                             System.out.println("The assessments for " + member.getName() + " are as follows: " + member.assessments.keySet());
+                                            System.out.println("The assessments in order for  " + member.getName() + " are as follows: " + member.sortedAssessmentDates());
+                                            System.out.println("The last one is " + member.sortedAssessmentDates().last());
+                                            System.out.println("The first one is " + member.sortedAssessmentDates().first());
                                             break;
                                     }
                                     System.out.println("Please enter the date of the assessment");

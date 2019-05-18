@@ -10,10 +10,13 @@ public class Assessment {
 
     public Assessment(float weight,float thigh,float waist,String comment)
     {
-        this.weight = weight;
+       this.weight = weight;
         this.thigh = thigh;
         this.waist = waist;
         this.comment = comment;
+      //  Member.setAssessWeight(weight);
+
+
 
 
     }
@@ -24,6 +27,7 @@ public class Assessment {
 
     public void setWeight(float weight) {
         this.weight = weight;
+
     }
 
 
@@ -34,6 +38,7 @@ public class Assessment {
 
     public void setThigh(float thigh) {
         this.thigh = thigh;
+
     }
 
 

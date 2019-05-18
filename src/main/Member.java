@@ -1,13 +1,15 @@
 
 // THIS CODE IS INCOMPLETE
 
+import java.text.DateFormat;
 import java.util.*;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 public class Member extends Person {
     private float height;
-    private float weight;
+    //private static float assessWeight;
+    private  float weight;
     private float startWeight;
     private String chosenPackage;
     private String gender;
@@ -17,7 +19,7 @@ public class Member extends Person {
                   String gender, float height, float weight, String chosenPackage) {
         super(email, name, address, gender);
         setHeight(height);
-        setWeight(weight);
+        setStartWeight(weight);
         setChosenPackage(chosenPackage);
     }
 
@@ -32,9 +34,7 @@ public class Member extends Person {
     //height must be between 1 and 3
     public void setHeight(float height) {
         if (height >= 1 & height <= 3) {
-            //if (height % 2 != 0) {
-              //  this.height = Math.round(height);//should not round
-            //} else {
+
                 this.height = height;
             }
 
@@ -44,36 +44,33 @@ public class Member extends Person {
     }
 
     public float getWeight() {
-        return weight;
-    }
-    //startWeight must be bewteen 35 and 250
-    public void setWeight(float weight) {
-        if (weight >= 35 & weight <= 250) {
-            //if (weight % 2 != 0) {
-                //this.weight = Math.round(weight);
-           // } else {
-                this.weight = weight;
-            }
-       // }
-        else {
-            this.weight =0;
+        float retWeight = 0.0f;
+        if (!getAssessments().isEmpty()) {
+            retWeight = latestAssessment().weight;
+            //return weight;
         }
+        else {
+            retWeight = weight;
+        }
+        return  retWeight;
+
     }
 
+
+
+    public  void setWeight() {
+        this.weight = weight;
+    }
     public float getStartWeight() {
         return startWeight;
     }
     //startWeight must be bewteen 35 and 250
     public void setStartWeight(float startWeight) {
-        if (startWeight >= 35 & startWeight <= 250) {
-           // if (startWeight % 2 != 0) {
-               // this.startWeight = Math.round(startWeight);//should not round
-            //} else {
+        if (startWeight >= 35.0f & startWeight <= 250.0f) {
                 this.startWeight = startWeight;
             }
-      //  }
         else {
-            this.startWeight =0;
+            this.startWeight =35.0f;
         }
     }
 
@@ -112,28 +109,58 @@ public class Member extends Person {
     }
 
     public HashMap<String,Assessment> getAssessments() {
+
+
         return assessments;
     }
 
 
    public SortedSet<String> sortedAssessmentDates() {
 
+        ArrayList<Date> listKeyAsDate = new ArrayList<>();
+        HashMap<String, Assessment> assessment = getAssessments();
+       DateFormat formatter = new SimpleDateFormat("yy/MM/dd");
+        int i =0;
+       for ( String key : assessment.keySet() ) {
+            try {
+                listKeyAsDate.add(i, new SimpleDateFormat("yy/MM/dd").parse(key));
+                i++;
+            }
+            catch (Exception e){
+                System.out.println("Something went wrong converting string to date");
+            }
 
-       //get the Key (which is the dates, from the assessments)
 
 
-        return null;
+       }
+       Collections.sort(listKeyAsDate);
+       SortedSet<String> set = new TreeSet<String>();
+       for(int j = 0; j<listKeyAsDate.size(); j++){
+           set.add(formatter.format(listKeyAsDate.get(j)).toString());
+       }
+
+
+
+
+        return set;
 
        //http://www.java2s.com/Tutorials/Java/Java_Collection/0110__Java_Sorted_Set.htm
-       //TO_DO
+
    }
 
    public Assessment latestAssessment (){
-        int i=0;//for resolving error in test only -
-       HashMap<String,Assessment> assessments = new HashMap<>();
-       return  assessments.get(i);
+        Assessment assessment = null;
 
-       //TO_DO
+
+       if(assessments.isEmpty()) {
+           assessment = null;
+       }
+       else
+       {
+           String latestDt = sortedAssessmentDates().last();
+           assessment = assessments.get(latestDt);
+       }
+      return assessment;
 
    }
 
