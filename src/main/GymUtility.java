@@ -10,8 +10,8 @@ public class GymUtility {
     public static double calculateBMI(Member member, Assessment assessment){
         //weight in kg over height (in cm squared)
 
-        double heightM = member.getHeight() / 3.28f; //this is the height in meters
-        return Math.round((assessment.getWeight()/(heightM*heightM)*100)/100);
+        double heightM = member.getHeight(); /// 3.28f; //this is the height in meters
+        return assessment.getWeight()/(heightM*heightM);
 
     }
 
