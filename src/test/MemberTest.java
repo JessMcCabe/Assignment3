@@ -275,8 +275,10 @@ public class MemberTest {
             @Test
             public void sorted() {
                 SortedSet<String> result = member1.sortedAssessmentDates();
-                assertTrue(result.last()  == "18/01/03",  "Last date not correct");
-                assertTrue(result.first() == "18/01/01", "First date not correct");
+                //assertTrue(result.last()  == "18/01/03",  "Last date not correct");
+                //assertTrue(result.first() == "18/01/01", "First date not correct");
+                assertTrue(result.last().equals("18/01/03"), "Last date not correct");
+                assertTrue(result.first().equals("18/01/01"), "Last date not correct");
             }
         }
         @Nested
