@@ -109,6 +109,9 @@ public class Member extends Person {
         super.setEmail(email);
     }
 
+
+
+
     //Sort the assessment dates in order
     public SortedSet<String> sortedAssessmentDates() {
         //Add all date strings to an ArrayList of type Date
@@ -152,9 +155,9 @@ public class Member extends Person {
     @Override
     public String toString() {
         return "Member: " + name.toUpperCase() +
-                "\n Height:" + "\t" + "\t" + "\t" + height +
+                "\n Height:" + "\t" + "\t" + "\t" + getHeight() +
                 " \n Start Weight:" + "\t" + "\t" + weight +
-                " \n Chosen Package:" + "\t" + chosenPackage +
+                " \n Chosen Package:" + "\t" + getAddress() +
                 " \n Gender:" + "\t" + "\t" + "\t" + gender +
                 " \n Email Address:" + "\t" + "\t" + super.getEmail() +
                 " \n Address:" + "\t" + "\t" + "\t" + super.getAddress() + "\n";

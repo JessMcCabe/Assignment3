@@ -27,6 +27,7 @@ public class MenuController {
     private boolean emailCorrect = false;
     private static String email;
     boolean matches = true;
+    private String option;
 
 
     public MenuController() {
@@ -42,11 +43,13 @@ public class MenuController {
 
     //make this the main menu and when we know if it is a member or trainer we then call the appropriate submenu
     private String mainMenu() {
+        System.out.println();
         System.out.println("Welcome To Play Gym Online");
         System.out.println("  1) To Login press L , to register, press R");
+        System.out.println("  2) To close the app, type close");
         do {
             try {
-                System.out.print("==>> ");
+                System.out.println();
                 return input.nextLine();
             } catch (Exception e) {
                 input.nextLine();  //swallows Scanner bug
@@ -57,6 +60,7 @@ public class MenuController {
 
     //Menu for the Members options formatted
     private String memMenu() {
+        System.out.println();
         System.out.println("Please choose from one of the following options:");
         System.out.println("OPTION \t \t \t \t \t DESCRIPTION"
                 + "\n V  \t \t \t \t \t  To view your profile press v"
@@ -65,7 +69,7 @@ public class MenuController {
                 + "\n L  \t \t \t \t \t  To Logout press l");
         do {
             try {
-                System.out.print("==>> ");
+                System.out.println();
                 return input.nextLine();
             } catch (Exception e) {
                 input.nextLine();  //swallows Scanner bug
@@ -77,6 +81,7 @@ public class MenuController {
 
     //Menu for the trainer options formatted
     private String trainMenu() {
+        System.out.println();
         System.out.println("Please choose from one of the following options:");
         System.out.println("OPTION \t \t \t \t \t DESCRIPTION"
                 + "\n A  \t \t \t \t \t  To add a new member press A"
@@ -98,6 +103,7 @@ public class MenuController {
 
     //Assessment subMenu formatted
     private String assessMenu() {
+        System.out.println();
         System.out.println("Please choose from one of the following options:");
         System.out.println("OPTION \t \t \t \t \t DESCRIPTION"
                 + "\n A  \t \t \t \t \t  To add an assessment for a member press A"
@@ -128,7 +134,7 @@ public class MenuController {
         memberPackages.put("Package 3", "Allowed access to gym at off-peak times. \n €5 fee for all classes. \n No access to deluxe changing rooms.");
         memberPackages.put("WIT", "Allowed access to gym during term time. \n €4 fee for all classes.  \n No access to deluxe changing rooms.");
 
-        String option = mainMenu();
+        option = mainMenu();
         while (!option.equals("close")) {
             switch (option.toUpperCase()) {
                 case "L":
@@ -208,6 +214,7 @@ public class MenuController {
                                             System.out.println("Please enter your new full name:");
                                             String name = input.nextLine();
                                             member.setName(name);
+                                            gym.save();
                                             break;
                                         case "N":
                                             break;
@@ -221,6 +228,7 @@ public class MenuController {
                                             System.out.println("Please enter your new email address:");
                                             email = input.nextLine();
                                             member.setEmail(email);
+                                            gym.save();
                                             break;
                                         case "N":
                                             break;
@@ -234,6 +242,7 @@ public class MenuController {
                                             System.out.println("Please enter your new gender (M for Male, F for Female or Unspecified for other:");
                                             String gender = input.nextLine();
                                             member.setGender(gender);
+                                            gym.save();
                                             break;
                                         case "N":
                                             break;
@@ -286,7 +295,7 @@ public class MenuController {
                             case "L":
                                 System.out.println("You have logged out, please press enter to see a menu");
                                 input.nextLine();
-                                userLoggedIn = false;
+                                memLoggedIn = false;
                                 run();
                                 break;
                             default:
@@ -384,9 +393,6 @@ public class MenuController {
                                 break;
 
                         }
-                        //System.out.println("Press enter to continue");
-                        //input.nextLine();
-                        //memMenu();
                     }
                     //break;
                 case "R":
@@ -413,9 +419,15 @@ public class MenuController {
                     break;
                 case "CLOSE":
                     System.out.println("You have chosen to Close the App.");
-                    break;
-                case "2":
-                    System.out.println("persons." + gym.toString());
+                    memLoggedIn=false;
+                    trainLoggedIn=false;
+                    try {
+                        gym.save();
+                    }
+                    catch(Exception e){
+                        System.out.println("Something went wrong on exit. Your session may not have saved correctly");
+                    }
+                    //run();
                     break;
                 default:
                     System.out.println("Invalid option selected.");
@@ -425,10 +437,12 @@ public class MenuController {
             //display the main menu again
             //System.out.println("");
             //option = mainMenu();
-            run();
+            //run();
         }
         System.out.println("Exiting... bye");
         System.out.println("");
+        memLoggedIn=false;
+        trainLoggedIn=false;
     }
 
 
