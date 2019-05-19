@@ -1,124 +1,136 @@
 <object-stream>
   <list>
-    <Member>
-      <email>bart.simpson@email.com</email>
-      <address>742evergree</address>
-      <height>2.0</height>
-      <startWeight>115.0</startWeight>
-      <chosenPackage>Studend</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>bartholemew simpson</name>
-    </Member>
-    <Member>
-      <email></email>
-      <address></address>
-      <height>2.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>mmmm</chosenPackage>
-      <gender>Unspecified</gender>
-      <name></name>
-    </Member>
-    <Member>
-      <email>mmmmmmmmmm</email>
-      <address>mmmmmmmmmmmmmmm</address>
-      <height>0.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>mm</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>mmmmmmmmmmmmmm</name>
-    </Member>
-    <Member>
-      <email>ddd</email>
-      <address>ddd</address>
-      <height>1.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>ddd</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>ddd</name>
-    </Member>
-    <Member>
-      <email>fff</email>
-      <address>ff</address>
-      <height>1.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>ff</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>ffffffffff</name>
-    </Member>
-    <Member>
-      <email>mmm</email>
-      <address>mmmmm</address>
-      <height>1.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>kkk</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>mmmmm</name>
-    </Member>
-    <Member>
-      <email>gggg</email>
-      <address>gggggggg</address>
-      <height>1.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>h</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>gggggggg</name>
-    </Member>
-    <Member>
-      <email>hhh</email>
-      <address>hhh</address>
-      <height>1.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>mmm</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>hhh</name>
-    </Member>
-    <Member>
-      <email>mmm</email>
-      <address>mmmmm</address>
-      <height>1.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>m</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>mmm</name>
-    </Member>
-    <Member>
-      <email>kkk</email>
-      <address>kk</address>
-      <height>1.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>l</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>kkk</name>
-    </Member>
-    <Member>
-      <email>hhh</email>
-      <address>hhh</address>
-      <height>1.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>mmm</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>hhh</name>
-    </Member>
-    <Member>
-      <email>dd</email>
-      <address>dd</address>
-      <height>1.0</height>
-      <startWeight>120.0</startWeight>
-      <chosenPackage>mm</chosenPackage>
-      <gender>Unspecified</gender>
-      <name>dd</name>
-    </Member>
     <Trainer>
-      <name>fff</name>
-      <email>ffff</email>
-      <address>fff</address>
-      <gender>Unspecified</gender>
+      <name>homer simpson</name>
+      <email>homer@simpson.com</email>
+      <address>42 Evergreen Terrace Springfield</address>
+      <gender>Male</gender>
+      <speciality>Sports</speciality>
     </Trainer>
+    <Member>
+      <email>marge@simpson.com</email>
+      <address>my home</address>
+      <height>5.8</height>
+      <weight>62.0</weight>
+      <startWeight>65.0</startWeight>
+      <chosenPackage>Package 2</chosenPackage>
+      <gender>female</gender>
+      <name>marge simpson</name>
+      <assessments>
+        <entry>
+          <string>19/05/15</string>
+          <Assessment>
+            <weight>60.0</weight>
+            <thigh>28.0</thigh>
+            <waist>32.0</waist>
+            <comment>My first assessment for marge</comment>
+          </Assessment>
+        </entry>
+      </assessments>
+    </Member>
+    <Member>
+      <email>mccabejessica88@gmail.com</email>
+      <address>Naas Co Kildare</address>
+      <height>2.0</height>
+      <weight>60.0</weight>
+      <startWeight>65.0</startWeight>
+      <chosenPackage>Package 2</chosenPackage>
+      <gender>F</gender>
+      <name>Jessica McCabe</name>
+      <assessments>
+        <entry>
+          <string>19/05/15</string>
+          <Assessment>
+            <weight>61.0</weight>
+            <thigh>24.0</thigh>
+            <waist>34.0</waist>
+            <comment>My assessment I added on 19/05/2019</comment>
+          </Assessment>
+        </entry>
+      </assessments>
+    </Member>
+    <Member>
+      <email>bart@simpson.com</email>
+      <address>42 Evergreen Terrace</address>
+      <height>2.0</height>
+      <weight>40.0</weight>
+      <startWeight>0.0</startWeight>
+      <chosenPackage>Package 1</chosenPackage>
+      <gender>M</gender>
+      <name>Bart Simpson</name>
+      <assessments/>
+    </Member>
+    <Member>
+      <email>lisa@simpson.com</email>
+      <address>42 Evergreen Terrace</address>
+      <height>1.0</height>
+      <weight>40.0</weight>
+      <startWeight>0.0</startWeight>
+      <chosenPackage>Package 3</chosenPackage>
+      <gender>F</gender>
+      <name>Lisa Simpson</name>
+      <assessments/>
+    </Member>
+    <Member>
+      <email>test@gmail.com</email>
+      <address>test</address>
+      <height>1.0</height>
+      <weight>40.0</weight>
+      <startWeight>0.0</startWeight>
+      <chosenPackage>Package </chosenPackage>
+      <gender>M</gender>
+      <name>test1</name>
+      <assessments/>
+    </Member>
+    <StudentMember>
+      <email>student@email.com</email>
+      <address>my home</address>
+      <height>5.8</height>
+      <weight>62.0</weight>
+      <startWeight>65.0</startWeight>
+      <chosenPackage>WIT</chosenPackage>
+      <gender>female</gender>
+      <name>student 1</name>
+      <assessments>
+        <entry>
+          <string>19/05/15</string>
+          <Assessment>
+            <weight>60.0</weight>
+            <thigh>28.0</thigh>
+            <waist>32.0</waist>
+            <comment>My first assessment for student</comment>
+          </Assessment>
+        </entry>
+      </assessments>
+      <studentId>0</studentId>
+    </StudentMember>
+    <PremiumMember>
+      <email>premium@email.com</email>
+      <address>my home</address>
+      <height>5.8</height>
+      <weight>62.0</weight>
+      <startWeight>65.0</startWeight>
+      <chosenPackage>WIT</chosenPackage>
+      <gender>female</gender>
+      <name>premium member 1</name>
+      <assessments>
+        <entry>
+          <string>19/05/15</string>
+          <Assessment>
+            <weight>60.0</weight>
+            <thigh>28.0</thigh>
+            <waist>32.0</waist>
+            <comment>My first assessment for premium member</comment>
+          </Assessment>
+        </entry>
+      </assessments>
+    </PremiumMember>
     <Trainer>
-      <name>t</name>
-      <email>t</email>
-      <address>t</address>
+      <name>trainer new</name>
+      <email>trainernew@gmail.com</email>
+      <address>trainer address 1</address>
       <gender>Unspecified</gender>
+      <speciality>Injury Recovery training </speciality>
     </Trainer>
   </list>
 </object-stream>

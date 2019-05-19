@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public class Assessment {
     public float weight;
     public float thigh;
@@ -8,15 +6,11 @@ public class Assessment {
     public Trainer trainer;
 
 
-    public Assessment(float weight,float thigh,float waist,String comment)
-    {
-       this.weight = weight;
+    public Assessment(float weight, float thigh, float waist, String comment) {
+        this.weight = weight;
         this.thigh = thigh;
         this.waist = waist;
         this.comment = comment;
-      //  Member.setAssessWeight(weight);
-
-
 
 
     }
@@ -29,7 +23,6 @@ public class Assessment {
         this.weight = weight;
 
     }
-
 
 
     public double getThigh() {
@@ -49,7 +42,6 @@ public class Assessment {
     public void setWaist(float waist) {
         this.waist = waist;
     }
-
 
 
     public String getComment() {

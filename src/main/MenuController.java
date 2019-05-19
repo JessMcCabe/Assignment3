@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -31,16 +30,11 @@ public class MenuController {
 
 
     public MenuController() {
-
-
         input = new Scanner(System.in);
         gym = new GymAPI();
-
     }
 
     public static void main(String args[]) {
-        //This needs to be a hasMap
-
         MenuController app = new MenuController();
         app.populateGym();
         app.run();
@@ -48,8 +42,6 @@ public class MenuController {
 
     //make this the main menu and when we know if it is a member or trainer we then call the appropriate submenu
     private String mainMenu() {
-
-
         System.out.println("Welcome To Play Gym Online");
         System.out.println("  1) To Login press L , to register, press R");
         do {
@@ -61,9 +53,9 @@ public class MenuController {
                 System.out.println("Something went Wrong, please try again");
             }
         } while (true);
-
     }
 
+    //Menu for the Members options formatted
     private String memMenu() {
         System.out.println("Please choose from one of the following options:");
         System.out.println("OPTION \t \t \t \t \t DESCRIPTION"
@@ -71,7 +63,6 @@ public class MenuController {
                 + "\n U  \t \t \t \t \t  To update your profile press u"
                 + "\n P  \t \t \t \t \t  To view your progress press p"
                 + "\n L  \t \t \t \t \t  To Logout press l");
-
         do {
             try {
                 System.out.print("==>> ");
@@ -84,14 +75,15 @@ public class MenuController {
 
     }
 
+    //Menu for the trainer options formatted
     private String trainMenu() {
         System.out.println("Please choose from one of the following options:");
         System.out.println("OPTION \t \t \t \t \t DESCRIPTION"
                 + "\n A  \t \t \t \t \t  To add a new member press A"
-                + "\n L  \t \t \t \t \t  To list all members press L"
+                + "\n M  \t \t \t \t \t  To list all members press M"
                 + "\n S  \t \t \t \t \t  To search for a member press S"
-                + "\n O  \t \t \t \t \t  To list options for assessments press O");
-
+                + "\n O  \t \t \t \t \t  To list options for assessments press O"
+                + "\n L  \t \t \t \t \t  To logout press L");
         do {
             try {
                 System.out.print("==>> ");
@@ -104,13 +96,13 @@ public class MenuController {
 
     }
 
+    //Assessment subMenu formatted
     private String assessMenu() {
         System.out.println("Please choose from one of the following options:");
         System.out.println("OPTION \t \t \t \t \t DESCRIPTION"
                 + "\n A  \t \t \t \t \t  To add an assessment for a member press A"
                 + "\n C  \t \t \t \t \t  To comment on an assessment press C"
         );
-
         do {
             try {
                 System.out.print("==>> ");
@@ -145,20 +137,17 @@ public class MenuController {
                     userType = input.nextLine();
 
                     while (!userLoggedIn) {
-                        //while (!memLoggedIn) {
                         switch (userType.toUpperCase()) {
                             case "M":
                                 System.out.println("Please enter your email address");
-                                 email = input.nextLine();
+                                email = input.nextLine();
                                 try {
-
                                     member = authenticateAsMember(email);//authenticate member
                                     if (member.getEmail() == null) {
                                         System.out.println("You have not been recognised as a member on our system");
                                         System.out.println("If you are registered, please try re-typing your email address,otherwise please return to the main menu and register");
                                     }
                                     System.out.println("Hello " + member.getName());
-                                    System.out.println("Testing printing member assessments " +  member.getAssessments().keySet());
                                 } catch (Exception e) {
                                     System.out.println("You have not been recognised as a member on our system");
                                     System.out.println("If you are registered, please try re-typing your email address,otherwise please return to the main menu and register");
@@ -190,7 +179,6 @@ public class MenuController {
 
 
                     //here we have options for the logged in member
-
                     while (memLoggedIn) {
 
                         String memOp = memMenu();
@@ -227,9 +215,6 @@ public class MenuController {
                                             break;
                                     }
                                     System.out.println("Do you wish to update your email address? Y/N");
-
-
-                                    System.out.println("Do you wish to update your name? Y/N");
                                     decision = input.nextLine();
                                     switch (decision.toUpperCase()) {
                                         case "Y":
@@ -242,10 +227,6 @@ public class MenuController {
                                         default:
                                             break;
                                     }
-
-
-
-
                                     System.out.println("Do you wish to update your gender? Y/N");
                                     decision = input.nextLine();
                                     switch (decision.toUpperCase()) {
@@ -262,7 +243,6 @@ public class MenuController {
                                     gym.save();
                                 } catch (Exception e) {
                                     System.out.println("Something went wrong");
-
                                 }
                                 break;
                             case "P":
@@ -270,66 +250,63 @@ public class MenuController {
                                 System.out.println("");
                                 System.out.println("To view your progress by Weight press 1, to view your progress by waist press 2");
                                 String decision = input.nextLine();
-
                                 try {
-                                   // member = gym.searchMembersByEmail(email);
                                     switch (decision.toUpperCase()) {
                                         case "1":
-
-
-                                            //System.out.println("Please confirm your email address:");
-                                            //email = input.nextLine();
-                                            //System.out.println("You are about to add an assessment for " + gym.searchMembersByEmail(email).getName());
                                             member = gym.searchMembersByEmail(email);
                                             System.out.println("Your weight has progressed in the following way: ");
-
                                             if (member.getAssessments().isEmpty()) {
                                                 System.out.println("You only have a starting weight recorded. Your starting weight is:  " + member.getStartWeight());
                                             } else {
                                                 SortedSet<String> result = member.sortedAssessmentDates();
-                                                System.out.println("Your most recent weight recorded was on :" + result.last() + " " + member.getAssessments().get(result.last()).getWeight());
+                                                System.out.println("Your most recent weight recorded was on " + result.last() + ", you weighed  " + member.getAssessments().get(result.last()).getWeight() + "kg");
+                                                if (member.getStartWeight() > member.getAssessments().get(result.last()).getWeight()) {
+                                                    System.out.println("You have lost " + (member.getStartWeight() - member.getAssessments().get(result.last()).getWeight()) + "kg since starting");
+                                                }
                                             }
                                             break;
                                         case "2":
+                                            member = gym.searchMembersByEmail(email);
+                                            System.out.println("Your waist measurement has progressed in the following way: ");
+
+                                            if (member.getAssessments().isEmpty()) {
+                                                System.out.println("You do not have a waist measurement recorded yet. Please ask your trainer to add your assessment");
+                                            } else {
+                                                SortedSet<String> result = member.sortedAssessmentDates();
+                                                System.out.println("Your most recent waist assessment recorded was on " + result.last() + ", your waist measured  " + member.getAssessments().get(result.last()).getWaist() + "cm");
+                                            }
                                             break;
                                         default:
                                             break;
                                     }
                                     gym.save();
                                 } catch (Exception e) {
-
-
                                 }
                                 break;
                             case "L":
                                 System.out.println("You have logged out, please press enter to see a menu");
                                 input.nextLine();
                                 userLoggedIn = false;
-                                // mainMenu();
+                                run();
                                 break;
                             default:
-                                //memMenu();
                                 break;
-
                         }
-                        System.out.println("Press enter to continue");
-                        input.nextLine();
-                        //memMenu();
+                        //System.out.println("Press enter to continue");
+                        //input.nextLine();
                     }
                     while (trainLoggedIn) {
                         String trainOp = trainMenu();
                         switch (trainOp.toUpperCase()) {
                             case "A"://add member
-
                                 try {
                                     trainerAddMember();
                                     input.nextLine();
                                 } catch (Exception e) {
                                     System.out.println("Something went wrong");
-
                                 }
                                 break;
-                            case "L"://list members
+                            case "M"://list members
                                 System.out.println("You have chosen to list all members:");
                                 System.out.println(gym.getMembers().toString());
                                 break;
@@ -365,7 +342,6 @@ public class MenuController {
                                         } catch (Exception e) {
                                             System.out.println("Something went wrong saving the assessment");
                                         }
-
                                         System.out.println(member.toString());
                                         break;
                                     case "C":
@@ -387,7 +363,6 @@ public class MenuController {
                                         }
                                         System.out.println("Please enter the date of the assessment");
                                         String date = input.nextLine();
-                                        //date = input.nextLine();
                                         System.out.println("Please enter the comment that you wish to add to this assessment");
                                         comment = input.nextLine();
                                         try {
@@ -397,20 +372,23 @@ public class MenuController {
                                             System.out.println("Something went wrong adding the comment");
                                         }
                                         break;
-                                    default:
-                                        break;
-                                }//add an option to go back up to the previous menu
+                                }
+                            case "L":
+                                System.out.println("You have logged out, please press enter to see a menu");
+                                input.nextLine();
+                                trainLoggedIn = false;
+                                run();
                                 break;
-                            default:
-                                //memMenu();
+
+                                default:
                                 break;
 
                         }
-                        System.out.println("Press enter to continue");
-                        input.nextLine();
+                        //System.out.println("Press enter to continue");
+                        //input.nextLine();
                         //memMenu();
                     }
-                    break;
+                    //break;
                 case "R":
                     System.out.println("You have chosen to Register");
                     System.out.println("To Register as a Member please enter M, to Register as a Trainer please enter T");
@@ -445,8 +423,9 @@ public class MenuController {
             }
 
             //display the main menu again
-            System.out.println("");
-            option = mainMenu();
+            //System.out.println("");
+            //option = mainMenu();
+            run();
         }
         System.out.println("Exiting... bye");
         System.out.println("");
@@ -470,8 +449,6 @@ public class MenuController {
         member = new Member(personPart.getEmail(), personPart.getName(), personPart.getAddress(),
                 personPart.getGender(), height, startWeight, chosenPackage);
         gym.addPerson(member);
-        //person= newMember;
-        //System.out.println("All filled in ");
         try {
             gym.save();
         } catch (Exception e) {
@@ -494,8 +471,6 @@ public class MenuController {
         trainer = new Trainer(personPart.getEmail(), personPart.getName(), personPart.getAddress(), personPart.getGender(), speciality);
         gym.addPerson(trainer);
 
-        //person= newMember;
-        //System.out.println("All filled in ");
         try {
             gym.save();
         } catch (Exception e) {

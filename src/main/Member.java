@@ -1,44 +1,37 @@
-
-// THIS CODE IS INCOMPLETE
-
 import java.text.DateFormat;
 import java.util.*;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+
 
 public class Member extends Person {
     private float height;
-    //private static float assessWeight;
-    private  float weight;
+    private float weight;
     private float startWeight;
     private String chosenPackage;
     private String gender;
     private String name;
 
-    public Member(String email, String name, String address,
-                  String gender, float height, float weight, String chosenPackage) {
-        super(email, name, address, gender);
+    public Member(String email, String name, String address, String gender, float height, float weight, String chosenPackage) {
+        super(email, name, address, gender);//Because Member extends Person
         setHeight(height);
         setStartWeight(weight);
         setChosenPackage(chosenPackage);
     }
 
 
-    public HashMap<String,Assessment> assessments = new HashMap<String,Assessment>();
+    public HashMap<String, Assessment> assessments = new HashMap<String, Assessment>();
 
 
     public float getHeight() {
         return height;
     }
 
-    //height must be between 1 and 3
+    //height must be between 1 and 3 meters
     public void setHeight(float height) {
         if (height >= 1 & height <= 3) {
 
-                this.height = height;
-            }
-
-        else {
+            this.height = height;
+        } else {
             this.height = 0;
         }
     }
@@ -47,30 +40,28 @@ public class Member extends Person {
         float retWeight = 0.0f;
         if (!getAssessments().isEmpty()) {
             retWeight = latestAssessment().getWeight();
-            //return weight;
-        }
-        else {
+        } else {
             retWeight = weight;
         }
-        return  retWeight;
-
+        return retWeight;
     }
 
 
-
-    public  void setWeight() {
+    public void setWeight(float weight)
+    {
         this.weight = weight;
     }
+
     public float getStartWeight() {
         return startWeight;
     }
-    //startWeight must be bewteen 35 and 250
+
+    //startWeight must be between 35 and 250
     public void setStartWeight(float startWeight) {
         if (startWeight >= 35.0f & startWeight <= 250.0f) {
-                this.startWeight = startWeight;
-            }
-        else {
-            this.startWeight =35.0f;
+            this.startWeight = startWeight;
+        } else {
+            this.startWeight = 35.0f; //set it to a default base weight if it is not within the correct range
         }
     }
 
@@ -88,7 +79,7 @@ public class Member extends Person {
 
     public void setGender(String gender) {
         if (gender.equals("F") || (gender.equals("M"))) {
-                this.gender = gender;
+            this.gender = gender;
 
         } else {
             this.gender = "Unspecified";
@@ -100,82 +91,73 @@ public class Member extends Person {
     }
 
     public void setName(String name) {
-        if (name.length()<=30) {
+        if (name.length() <= 30) {
             this.name = name;
 
         } else {
-            this.name = name.substring(0,30);
+            this.name = name.substring(0, 30);//limit the name to 30 length
         }
     }
 
-    public HashMap<String,Assessment> getAssessments() {
+    public HashMap<String, Assessment> getAssessments() {
 
 
         return assessments;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         super.setEmail(email);
     }
 
-   public SortedSet<String> sortedAssessmentDates() {
-
+    //Sort the assessment dates in order
+    public SortedSet<String> sortedAssessmentDates() {
+        //Add all date strings to an ArrayList of type Date
         ArrayList<Date> listKeyAsDate = new ArrayList<>();
         HashMap<String, Assessment> assessment = getAssessments();
-       DateFormat formatter = new SimpleDateFormat("yy/MM/dd");
-        int i =0;
-       for ( String key : assessment.keySet() ) {
+        DateFormat formatter = new SimpleDateFormat("yy/MM/dd");
+        int i = 0;
+        for (String key : assessment.keySet()) {
             try {
                 listKeyAsDate.add(i, new SimpleDateFormat("yy/MM/dd").parse(key));
                 i++;
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Something went wrong converting string to date");
             }
 
 
-
-       }
-       Collections.sort(listKeyAsDate);
-       SortedSet<String> set = new TreeSet<String>();
-       for(int j = 0; j<listKeyAsDate.size(); j++){
-           set.add(formatter.format(listKeyAsDate.get(j)).toString());
-       }
-
-
-
-
+        }
+        //Sort the dates in order
+        Collections.sort(listKeyAsDate);
+        //Add all the dates to a TreeSet to be returned as a set
+        SortedSet<String> set = new TreeSet<String>();
+        for (int j = 0; j < listKeyAsDate.size(); j++) {
+            set.add(formatter.format(listKeyAsDate.get(j)));
+        }
         return set;
+        //http://www.java2s.com/Tutorials/Java/Java_Collection/0110__Java_Sorted_Set.htm
+    }
 
-       //http://www.java2s.com/Tutorials/Java/Java_Collection/0110__Java_Sorted_Set.htm
-
-   }
-
-   public Assessment latestAssessment (){
+    //Use the sorted assessments to return the latest assessment
+    public Assessment latestAssessment() {
         Assessment assessment = null;
-
-
-       if(assessments.isEmpty()) {
-           assessment = null;
-       }
-       else
-       {
-           String latestDt = sortedAssessmentDates().last();
-           assessment = assessments.get(latestDt);
-       }
-      return assessment;
-
-   }
+        if (assessments.isEmpty()) {
+            assessment = null;
+        } else {
+            String latestDt = sortedAssessmentDates().last();
+            assessment = assessments.get(latestDt);
+        }
+        return assessment;
+    }
 
     @Override
     public String toString() {
         return "Member: " + name.toUpperCase() +
-                "\n Height:" + "\t"+"\t" +"\t" + height +
-                " \n Start Weight:" + "\t"+"\t" +weight +
-                " \n Chosen Package:" + "\t" +chosenPackage +
-                " \n Gender:" + "\t"+"\t"+"\t" +gender + //this needs to print male or female depending of F or M
-                " \n Email Address:" + "\t"+"\t" +super.getEmail() +
-                 " \n Address:" + "\t"+"\t" +"\t"+super.getAddress() + "\n";
+                "\n Height:" + "\t" + "\t" + "\t" + height +
+                " \n Start Weight:" + "\t" + "\t" + weight +
+                " \n Chosen Package:" + "\t" + chosenPackage +
+                " \n Gender:" + "\t" + "\t" + "\t" + gender +
+                " \n Email Address:" + "\t" + "\t" + super.getEmail() +
+                " \n Address:" + "\t" + "\t" + "\t" + super.getAddress() + "\n";
     }
 }
 
