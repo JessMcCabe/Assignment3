@@ -29,9 +29,27 @@ Menu - Login or Register working (Login or Register as Trainer or Member)
 
        The app can be closed from the outer most menu by typing close
 
+Tests - Fully-featured. All unit tests pass.
+
 Known bugs/problems :
+When a member updates their details and then views their profile, they will see their updated details, however, there is an issue saving the updated member, caused by an exception in the save() method
+When the user closes out of the app there is an extra call to a sub menu that should not appear
 
 Any sources referred to during the development of the assignment (no need to reference lecture/lab materials):
 
 Reading in file error:
 https://stackoverflow.com/questions/30812293/com-thoughtworks-xstream-security-forbiddenclassexception
+Plus or minus a certain value
+https://stackoverflow.com/questions/10264313/java-if-statement-a-is-equal-to-b-plus-or-minus-2
+Metrics
+https://www.metric-conversions.org/length/feet-to-inches.htm
+https://www.rapidtables.com/convert/weight/how-kg-to-pound.html
+Rounding of floats
+https://stackoverflow.com/questions/8753959/round-a-floating-point-number-to-the-next-integer-value-in-java
+https://www.quora.com/How-can-I-round-a-number-to-1-decimal-digit-in-Java
+Sorted Sets
+http://www.java2s.com/Tutorial/Java/0140__Collections/CreatingaSortedSet.htm
+https://www.quora.com/How-do-I-sort-an-ArrayList-of-dates-based-on-the-current-date-in-Java
+https://kodejava.org/how-do-i-format-a-date-into-ddmmyyyy/
+Instance Of
+https://www.javatpoint.com/downcasting-with-instanceof-operator
