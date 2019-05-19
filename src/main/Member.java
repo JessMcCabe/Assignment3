@@ -46,7 +46,7 @@ public class Member extends Person {
     public float getWeight() {
         float retWeight = 0.0f;
         if (!getAssessments().isEmpty()) {
-            retWeight = latestAssessment().weight;
+            retWeight = latestAssessment().getWeight();
             //return weight;
         }
         else {
